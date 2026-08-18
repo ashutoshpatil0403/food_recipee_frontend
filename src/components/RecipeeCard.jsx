@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { BASE_URL } from "../utils/Constants";
 import { useAuth } from "../context/useAuth";
 import { useToast } from "../context/useToast";
 
@@ -15,7 +16,7 @@ const RecipeCard = ({ recipe }) => {
       return;
     }
     try {
-      await axios.post(`http://localhost:5000/favourites/${recipe._id}`, {}, { withCredentials: true });
+      await axios.post(`${BASE_URL}/favourites/${recipe._id}`, {}, { withCredentials: true });
       showToast("Added to favourites!");
     } catch (error) {
       if (error.response?.status === 400) {
@@ -31,7 +32,7 @@ const RecipeCard = ({ recipe }) => {
       {/* Cover Image */}
       {recipe.coverImage && (
         <img
-          src={`http://localhost:5000${recipe.coverImage}`}
+          src={`${BASE_URL}${recipe.coverImage}`}
           alt={recipe.title}
           className="w-full h-44 object-cover"
         />

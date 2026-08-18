@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { BASE_URL } from "../utils/Constants";
 
 const Favourites = () => {
   const [favourites, setFavourites] = useState([]);
@@ -9,7 +10,7 @@ const Favourites = () => {
     let ignore = false;
     const fetchFavourites = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/favourites", { withCredentials: true });
+        const response = await axios.get(`${BASE_URL}/favourites`, { withCredentials: true });
         if (!ignore) setFavourites(response.data);
       } catch (error) {
         console.error("Error fetching favourites:", error);
@@ -23,7 +24,7 @@ const Favourites = () => {
 
   const handleRemoveFav = async (recipeeId) => {
     try {
-      await axios.delete(`http://localhost:5000/favourites/${recipeeId}`, { withCredentials: true });
+      await axios.delete(`${BASE_URL}/favourites/${recipeeId}`, { withCredentials: true });
       setFavourites(favourites.filter((r) => r._id !== recipeeId));
     } catch (error) {
       console.error("Error removing from favourites:", error);
@@ -62,7 +63,7 @@ const Favourites = () => {
               >
                 {recipe.coverImage && (
                   <img
-                    src={`http://localhost:5000${recipe.coverImage}`}
+                    src={`${BASE_URL}${recipe.coverImage}`}
                     alt={recipe.title}
                     className="w-full h-44 object-cover"
                   />

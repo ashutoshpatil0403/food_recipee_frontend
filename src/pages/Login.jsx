@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { BASE_URL } from "../utils/Constants";
 import { useAuth } from "../context/useAuth";
 import { useToast } from "../context/useToast";
 
@@ -16,7 +17,7 @@ const Login = () => {
     e.preventDefault();
     setErrorMessage("");
     try {
-      const response = await axios.post("http://localhost:5000/login", { email, password }, { withCredentials: true });
+      const response = await axios.post(`${BASE_URL}/login`, { email, password }, { withCredentials: true });
       login(response.data.user);
       showToast("Logged in successfully");
       navigate("/");

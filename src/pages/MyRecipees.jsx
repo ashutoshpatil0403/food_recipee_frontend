@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { BASE_URL } from "../utils/Constants";
 
 const MyRecipees = () => {
   const [recipees, setRecipees] = useState([]);
@@ -15,7 +16,7 @@ const MyRecipees = () => {
 
   const fetchMyRecipees = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/my-recipees", { withCredentials: true });
+      const response = await axios.get(`${BASE_URL}/my-recipees`, { withCredentials: true });
       setRecipees(response.data);
     } catch (error) {
       console.error("Error fetching my recipees:", error);
@@ -41,7 +42,7 @@ const MyRecipees = () => {
 
   const handleEditSubmit = async (id) => {
     try {
-      await axios.put(`http://localhost:5000/recipee/${id}`, editForm, { withCredentials: true });
+      await axios.put(`${BASE_URL}/recipee/${id}`, editForm, { withCredentials: true });
       setEditingId(null);
       fetchMyRecipees();
     } catch (error) {
@@ -87,11 +88,11 @@ const MyRecipees = () => {
               >
                 {recipe.coverImage && (
                   <img
-                    src={`http://localhost:5000${recipe.coverImage}`}
+                    src={`${BASE_URL}${recipe.coverImage}`}
                     alt={recipe.title}
                     className="w-full h-44 object-cover"
                   />
-                )}
+                )}}
                 <div className="p-5 flex-1 flex flex-col">
                   {editingId === recipe._id ? (
                     <div className="space-y-3 flex-1">

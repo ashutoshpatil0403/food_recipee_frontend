@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import { BASE_URL } from "../utils/Constants";
 import { useAuth } from "../context/useAuth";
 import { useToast } from "../context/useToast";
 
@@ -23,7 +24,7 @@ const EditProfile = () => {
     setLoading(true);
     try {
       const res = await axios.put(
-        "http://localhost:5000/profile",
+        `${BASE_URL}/profile`,
         { firstName, lastName, mobileNo },
         { withCredentials: true }
       );
@@ -45,7 +46,7 @@ const EditProfile = () => {
     setPwdLoading(true);
     try {
       await axios.put(
-        "http://localhost:5000/change-password",
+        `${BASE_URL}/change-password`,
         { currentPassword, newPassword },
         { withCredentials: true }
       );

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { BASE_URL } from "../utils/Constants";
 import { useToast } from "../context/useToast";
 
 const AddRecipee = () => {
@@ -46,7 +47,7 @@ const AddRecipee = () => {
       if (file) {
         formData.append("file", file);
       }
-      await axios.post("http://localhost:5000/recipee", formData, { withCredentials: true });
+      await axios.post(`${BASE_URL}/recipee`, formData, { withCredentials: true });
       showToast("Recipe added successfully!");
       navigate("/");
     } catch (error) {
