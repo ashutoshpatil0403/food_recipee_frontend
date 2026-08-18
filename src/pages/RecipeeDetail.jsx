@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
+import { BASE_URL } from "../utils/Constants";
 
 const RecipeeDetail = () => {
   const { id } = useParams();
@@ -10,7 +11,7 @@ const RecipeeDetail = () => {
   useEffect(() => {
     const fetchRecipe = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/recipee/${id}`);
+        const res = await axios.get(`${BASE_URL}/recipee/${id}`);
         setRecipe(res.data);
       } catch (error) {
         console.error("Error fetching recipe:", error);
@@ -45,7 +46,7 @@ const RecipeeDetail = () => {
         {/* Cover Image */}
         {recipe.coverImage && (
           <img
-            src={`http://localhost:5000${recipe.coverImage}`}
+            src={`${BASE_URL}${recipe.coverImage}`}
             alt={recipe.title}
             className="w-full h-72 object-cover"
           />

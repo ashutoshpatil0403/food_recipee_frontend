@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { AuthContext } from "./useAuth";
 import axios from "axios";
+import { BASE_URL } from "../utils/Constants";
 
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(
@@ -19,7 +20,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      await axios.post("http://localhost:5000/logout", {}, { withCredentials: true });
+      await axios.post(`${BASE_URL}/logout`, {}, { withCredentials: true });
     } catch (error) {
       console.error("Logout error:", error);
     }
