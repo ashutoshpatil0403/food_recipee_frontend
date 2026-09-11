@@ -92,7 +92,7 @@ const MyRecipees = () => {
                     alt={recipe.title}
                     className="w-full h-44 object-cover"
                   />
-                )}}
+                )}
                 <div className="p-5 flex-1 flex flex-col">
                   {editingId === recipe._id ? (
                     <div className="space-y-3 flex-1">
